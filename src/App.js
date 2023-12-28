@@ -26,27 +26,14 @@ const App = () => {
     },
   ];
 
-  const [filteredExpensesData, setfilteredExpensesData] = useState(expenses);
-
   const addExpenseHandler = (expense) => {
     console.log(expense);
-  };
-
-  const filterExpenseHandler = (filteredExpenseDate) => {
-    setfilteredExpensesData(
-      expenses.filter((filterData) => {
-        return filterData.date.getFullYear() === Number(filteredExpenseDate);
-      })
-    );
   };
 
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses
-        items={filteredExpensesData}
-        onFilterExpense={filterExpenseHandler}
-      />
+      <Expenses items={expenses} />
     </div>
   );
 };
