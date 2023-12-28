@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import NewExpense from "./components/NewExpense/NewExpense";
 import Expenses from "./components/Expenses/Expenses";
 
 const App = () => {
@@ -24,10 +26,27 @@ const App = () => {
     },
   ];
 
+  const [filteredExpensesData, setfilteredExpensesData] = useState(expenses);
+
+  const addExpenseHandler = (expense) => {
+    console.log(expense);
+  };
+
+  const filterExpenseHandler = (filteredExpenseDate) => {
+    setfilteredExpensesData(
+      expenses.filter((filterData) => {
+        return filterData.date.getFullYear() === Number(filteredExpenseDate);
+      })
+    );
+  };
+
   return (
     <div>
-      <h2>Let's get started!</h2>
-      <Expenses items={expenses} />
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses
+        items={filteredExpensesData}
+        onFilterExpense={filterExpenseHandler}
+      />
     </div>
   );
 };
