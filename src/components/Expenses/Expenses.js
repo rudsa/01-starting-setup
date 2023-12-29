@@ -8,13 +8,11 @@ const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState("2020");
 
   const filterChangeHandler = (selectedYear) => {
-    console.log(typeof selectedYear);
     setFilteredYear(selectedYear);
   };
 
-  const filterExpensesData = props.items.filter((item) => {
-    console.log("dataCheck :>> ", typeof item.date.getFullYear());
-    return String(item.date.getFullYear()) === filteredYear;
+  const filterExpensesData = props.items.filter((expense) => {
+    return String(expense.date.getFullYear()) === filteredYear;
   });
 
   return (
@@ -24,13 +22,13 @@ const Expenses = (props) => {
           onChangeFilter={filterChangeHandler}
           selected={filteredYear}
         />
-        {filterExpensesData.map((item) => {
+        {filterExpensesData.map((expense) => {
           return (
             <ExpenseItem
-              title={item.title}
-              amount={item.amount}
-              date={item.date}
-              key={item.id}
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
             />
           );
         })}
